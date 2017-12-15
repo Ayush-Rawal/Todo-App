@@ -14,7 +14,7 @@ class Input extends Component {
         })
     }
 
-	handlekeypress = (event) => {
+	handleKeypress = (event) => {
 		if(event.key=='Enter'){
 			//Function to submit list
 			this.props.addTask(event.target.value);
@@ -37,7 +37,7 @@ class Input extends Component {
 			<div className='row mar10'>
 				<div className='col-lg-12'>
 					<div className='input-group'>
-						<input className='form-control' type = 'text' placeholder = 'Enter task' onChange = { evt => this.changeinp(evt) } value = { this.state.inpval } onKeyPress={this.handlekeypress} />
+						<input className='form-control' type = 'text' placeholder = 'Enter task' onChange = { evt => this.changeinp(evt) } value = { this.state.inpval } onKeyPress={this.handleKeypress} />
 						<span className='input-group-btn'>
 							<button className='btn btn-primary' type='submit' onClick={this.handleClick} >Submit</button>
 						</span>
