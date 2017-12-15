@@ -15,7 +15,7 @@ class Input extends Component {
     }
 
 	handleKeypress = (event) => {
-		if(event.key=='Enter'){
+		if(event.key=='Enter'&&event.target.value!==""){
 			//Function to submit list
 			this.props.addTask(event.target.value);
 			this.setState({
@@ -25,11 +25,13 @@ class Input extends Component {
 	}
 
 	handleClick = (event) => {
-		console.log(event)
-		this.props.addTask(this.state.inpval);
-		this.setState({
-			inpval:""
-		});
+		if(this.state.inpval!==""){
+			console.log(event)
+			this.props.addTask(this.state.inpval);
+			this.setState({
+				inpval:""
+			});
+		}
 	}
 
     render() {

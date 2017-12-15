@@ -8,7 +8,7 @@ class Header extends PureComponent {
 			<img src={logo} className="App-logo" alt="logo" />
 			<h1 className="App-title">ToDo App</h1>
 		  </header>
-		)
+		);
 	}
 }
 
