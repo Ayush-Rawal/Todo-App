@@ -23,7 +23,15 @@ class App extends Component {
 		});
 	}
 
-
+	deleteTask(id){
+		let templist = this.state.tasks.slice();
+    let index = templist.indexOf(id);
+    templist.splice(index,1);
+    localStorage.setItem('Tasks',JSON.stringify(templist));
+    this.setState({
+      tasks:templist
+    })
+	}
 
   render() {
     return (
@@ -32,7 +40,7 @@ class App extends Component {
           <Header/>
         </div>
         <Input addTask={this.addTask.bind(this)}/>
-        <Lists lists={this.state.tasks} />
+        <Lists lists={this.state.tasks} handleDelete={this.deleteTask.bind(this)} />
       </div>
     );
   }

@@ -12,7 +12,7 @@ class List extends Component {
 	}
 
 	render(){
-		
+
 		const listclasses = classNames({
 			well: this.state.Done,
 			'list-group-item-success' : this.state.Done,
@@ -33,7 +33,6 @@ class List extends Component {
 				<div className={listclasses}>
 					<h3>{this.props.list}</h3> 
 				</div>
-				{/* to be later formatted with BootStrap */}
 				<div className='col-lg-3'>
 				<div className="btn-group" role="group" aria-label="Buttons for Done, Delete">
 					<button className='btn btn-lg btn-outline-success' onClick={ () => this.setState({Done:!this.state.Done}) } >
@@ -41,7 +40,7 @@ class List extends Component {
 						<i className={iclasses} ></i> {this.state.Done?"Mark Undone":"Mark Done"}
 						</span>
 					</button>
-					<button className='btn btn-lg btn-danger' >Delete</button>
+					<button className='btn btn-lg btn-danger' onClick={ () => this.props.handleDelete(this.props.id) } >Delete</button>
 				</div>
 				</div>
 			</div>
