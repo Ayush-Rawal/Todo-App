@@ -11,15 +11,15 @@ class Page extends Component {
 		  activePage: 1,
 			totalElems:this.props.totalTasks,
 			pageRange:3,
-			elemsPerPage:7,
+			elemsPerPage:this.props.tasksPerPage || 6,
 		};
 	  }
 	 
 	handlePageChange(pageNumber) {
 		this.setState({
-			activePage: pageNumber
+			activePage: pageNumber,
 		});
-		this.props.changeCurrTasks(this.state.activePage,this.state.elemsPerPage);
+		this.props.changeCurrTasks(pageNumber,this.state.elemsPerPage);
 	}
 	 
 	  render() {

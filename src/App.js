@@ -14,6 +14,8 @@ class App extends Component {
       tasks: JSON.parse(localStorage.getItem('Tasks')) || emptyarr,
       currTasks: JSON.parse(localStorage.getItem('Tasks')).slice(0,6) || emptyarr ,
       totalTasks: JSON.parse(localStorage.getItem('Tasks')).length || 0 ,
+      currPage:1,
+      tasksPerPage:6
     }
   }
 
@@ -24,7 +26,11 @@ class App extends Component {
 		this.setState({
       tasks:tempList,
       totalTasks:tempList.length,
-		});
+      currTasks:tempList.slice((this.state.currPage-1)*this.state.tasksPerPage,this.state.currPage*this.state.tasksPerPage),
+    });
+    if(tempList.length%this.state.tasksPerPage == 1){
+      this.changeCurrTasks(this.state.currPage+1,this.state.tasksPerPage);
+    }
 	}
 
 	deleteTask(id){
@@ -33,7 +39,8 @@ class App extends Component {
     templist.splice(index,1);
     localStorage.setItem('Tasks',JSON.stringify(templist));
     this.setState({
-      tasks:templist
+      tasks:templist,
+      totalTasks:templist.length,
     })
   }
   
@@ -43,6 +50,7 @@ class App extends Component {
     let tempList = this.state.tasks.slice(indexBeg,indexEnd)
     this.setState({
       currTasks: tempList,
+      currPage:currPage,
     })
   }
 
@@ -54,7 +62,7 @@ class App extends Component {
         </div>
         <Input addTask={this.addTask.bind(this)}/>
         <Lists lists={this.state.currTasks} handleDelete={this.deleteTask.bind(this)} />
-        <Page lists={this.state.tasks} changeCurrTasks={this.changeCurrTasks.bind(this)} totalTasks={this.state.totalTasks} />
+        <Page lists={this.state.tasks} changeCurrTasks={this.changeCurrTasks.bind(this)} totalTasks={this.state.totalTasks} tasksPerPage={this.state.tasksPerPage} />
       </div>
     );
   }
