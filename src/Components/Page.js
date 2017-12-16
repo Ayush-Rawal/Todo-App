@@ -21,14 +21,28 @@ class Page extends Component {
 		});
 		this.props.changeCurrTasks(pageNumber,this.state.elemsPerPage);
 	}
-	 
-	  render() {
+	
+	// Instead of using the following method to update state on prop change, one can directly use the prop value instead of the state value
+	// See commented part in Pagination tag
+	// Leaving this as a reminder here
+	// Leaving two tactical dots (.)(.)
+
+	componentWillReceiveProps(nextProps){
+		if(nextProps.totalTasks!=this.state.totalElems){
+			this.setState({
+				totalElems:nextProps.totalTasks
+			})
+		}
+	}
+
+	render() {
 		return (
 		  <div>
-			<Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.elemsPerPage} totalItemsCount={this.state.totalElems} pageRangeDisplayed={this.state.pageRange} onChange={this.handlePageChange.bind(this)}/>
+				<h5>Total Tasks: {this.props.totalTasks} </h5>
+			<Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.elemsPerPage} totalItemsCount={this.state.totalElems/* props.totalTasks */} pageRangeDisplayed={this.state.pageRange} onChange={this.handlePageChange.bind(this)}/>
 			</div>
 		);
-	  }
 	}
+}
 
 	export default Page
