@@ -8,6 +8,30 @@ class List extends Component {
 		super(props);
 		this.state  = {
 			Done:false,
+			Modify:false,
+			inpVal:"",
+		}
+	}
+
+	changeinp(evt) {
+		this.setState({
+			inpVal: evt.target.value
+		})
+	}
+
+	handleChange = (text) => {
+		if(text!==""){
+			this.props.handleModify(this.props.id,text);
+			this.setState({
+				Modify:false,
+				inpVal:"",
+			});
+		}
+	}
+
+	handleKeypress = (event) => {
+		if(event.key=='Enter'&&event.target.value!==""){
+			this.handleChange(event.target.value);
 		}
 	}
 
@@ -16,7 +40,7 @@ class List extends Component {
 		const listclasses = classNames({
 			well: this.state.Done,
 			'list-group-item-success' : this.state.Done,
-			'col-lg-9': true, 
+			'col-lg-6': true, 
 			pad: true,
 			// 'list-group-item':true
 		});	
@@ -29,20 +53,32 @@ class List extends Component {
 		});
 
 		return(
-			<div className="row App mar7" id={this.props.id} >
-				<div className={listclasses}>
-					<h3>{this.props.list}</h3> 
+			<div>
+				{!this.state.Modify && <div className="row App mar7" id={this.props.id} > 
+					<div className={listclasses}>
+						<h3>{this.props.list}</h3> 
+					</div>
+					<div className='col-lg-6'>
+					<div className="btn-group" role="group" aria-label="Buttons for Done, Delete">
+						<button className='btn btn-lg btn-outline-success' onClick={ () => this.setState({Done:!this.state.Done}) } >
+							<span>
+							<i className={iclasses} ></i> {this.state.Done?"Mark Undone":"Mark Done"}
+							</span>
+						</button>
+						<button className='btn btn-lg btn-warning' onClick={ () => this.setState({Modify:true}) }>Modify</button>					
+						<button className='btn btn-lg btn-danger' onClick={ () => this.props.handleDelete(this.props.id) } >Delete</button>
+					</div>
+					</div>
+				</div> }
+				
+				{this.state.Modify && <div className="row App mar7" id={this.props.id} >
+				<div className='col-lg-10'>
+				<input className='form-control' type = 'text' placeholder = 'Enter new task' onChange = { evt => this.changeinp(evt) } value = { this.state.inpval } onKeyPress={this.handleKeypress} />
 				</div>
-				<div className='col-lg-3'>
-				<div className="btn-group" role="group" aria-label="Buttons for Done, Delete">
-					<button className='btn btn-lg btn-outline-success' onClick={ () => this.setState({Done:!this.state.Done}) } >
-						<span>
-						<i className={iclasses} ></i> {this.state.Done?"Mark Undone":"Mark Done"}
-						</span>
-					</button>
-					<button className='btn btn-lg btn-danger' onClick={ () => this.props.handleDelete(this.props.id) } >Delete</button>
+				<div className='col-lg-2'>
+				<button className='btn btn-lg btn-warning' type='submit' onClick={ () => this.handleChange(this.state.inpVal) }>Modify</button>					
 				</div>
-				</div>
+				</div> }
 			</div>
 		)
 	}

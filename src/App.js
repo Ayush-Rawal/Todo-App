@@ -47,6 +47,17 @@ class App extends Component {
       this.changeCurrTasks(this.state.currPage-1,this.state.tasksPerPage);
     }
   }
+
+  modifyTask(id,modification){
+    let tempList = this.state.tasks.slice();
+    let index = tempList.indexOf(id);
+    tempList[index] = modification;
+    this.setState({
+      tasks:tempList.slice(),
+      currTasks:tempList.slice((this.state.currPage-1)*this.state.tasksPerPage,this.state.currPage*this.state.tasksPerPage),      
+    });
+    localStorage.setItem('Tasks',JSON.stringify(tempList));    
+  }
   
   changeCurrTasks(currPage,itemsPerPage){
     let indexBeg = (currPage-1) * itemsPerPage
@@ -65,7 +76,7 @@ class App extends Component {
           <Header/>
         </div>
         <Input addTask={this.addTask.bind(this)}/>
-        <Lists lists={this.state.currTasks} handleDelete={this.deleteTask.bind(this)} />
+        <Lists lists={this.state.currTasks} handleDelete={this.deleteTask.bind(this)} handleModify={this.modifyTask.bind(this)} />
         <Page lists={this.state.tasks} changeCurrTasks={this.changeCurrTasks.bind(this)} totalTasks={this.state.totalTasks} tasksPerPage={this.state.tasksPerPage} />
 {/*         <footer className='footer'>
         <div id='footer'>

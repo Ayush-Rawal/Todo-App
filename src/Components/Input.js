@@ -26,7 +26,6 @@ class Input extends Component {
 
 	handleClick = (event) => {
 		if(this.state.inpval!==""){
-			console.log(event)
 			this.props.addTask(this.state.inpval);
 			this.setState({
 				inpval:""
