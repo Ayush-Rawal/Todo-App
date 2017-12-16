@@ -34,14 +34,18 @@ class App extends Component {
 	}
 
 	deleteTask(id){
-		let templist = this.state.tasks.slice();
-    let index = templist.indexOf(id);
-    templist.splice(index,1);
-    localStorage.setItem('Tasks',JSON.stringify(templist));
+		let tempList = this.state.tasks.slice();
+    let index = tempList.indexOf(id);
+    tempList.splice(index,1);
+    localStorage.setItem('Tasks',JSON.stringify(tempList));
     this.setState({
-      tasks:templist,
-      totalTasks:templist.length,
-    })
+      tasks:tempList,
+      totalTasks:tempList.length,
+      currTasks:tempList.slice((this.state.currPage-1)*this.state.tasksPerPage,this.state.currPage*this.state.tasksPerPage),      
+    });
+    if(tempList.length%this.state.tasksPerPage == 0&&this.state.currPage==(tempList.length/this.state.tasksPerPage+1)){
+      this.changeCurrTasks(this.state.currPage-1,this.state.tasksPerPage);
+    }
   }
   
   changeCurrTasks(currPage,itemsPerPage){
@@ -63,6 +67,11 @@ class App extends Component {
         <Input addTask={this.addTask.bind(this)}/>
         <Lists lists={this.state.currTasks} handleDelete={this.deleteTask.bind(this)} />
         <Page lists={this.state.tasks} changeCurrTasks={this.changeCurrTasks.bind(this)} totalTasks={this.state.totalTasks} tasksPerPage={this.state.tasksPerPage} />
+{/*         <footer className='footer'>
+        <div id='footer'>
+          Made with <i className='fa fa-heart red' ></i> by Ayush Rawal  <a class="github-button" href="https://github.com/Ayush-Rawal" aria-label="Follow @Ayush-Rawal on GitHub">Follow @Ayush-Rawal</a>
+        </div>
+        </footer> */}
       </div>
     );
   }

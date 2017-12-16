@@ -37,9 +37,11 @@ class Page extends Component {
 
 	render() {
 		return (
-		  <div>
+		  <div className='container' >
 				<h5>Total Tasks: {this.props.totalTasks} </h5>
-			<Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.elemsPerPage} totalItemsCount={this.state.totalElems/* props.totalTasks */} pageRangeDisplayed={this.state.pageRange} onChange={this.handlePageChange.bind(this)}/>
+				<div className='pagination'>
+					<Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.elemsPerPage} totalItemsCount={this.state.totalElems/* props.totalTasks */} pageRangeDisplayed={this.state.pageRange} onChange={this.handlePageChange.bind(this)} innerClass='pagination' itemClass="page-item" />
+				</div>
 			</div>
 		);
 	}
