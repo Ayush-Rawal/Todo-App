@@ -35,6 +35,13 @@ class List extends Component {
 		}
 	}
 
+	cancelModification(){
+		this.setState({
+			Modify:false,
+			inpVal:"",
+		})
+	}
+
 	render(){
 
 		const listclasses = classNames({
@@ -59,7 +66,7 @@ class List extends Component {
 						<h3>{this.props.list}</h3> 
 					</div>
 					<div className='col-lg-4'>
-					<div className="btn-group" role="group" aria-label="Buttons for Done, Delete">
+					<div className="btn-group" role="group" aria-label="Buttons for Done, Modify and Delete">
 						<button className='btn btn-lg btn-outline-success' onClick={ () => this.setState({Done:!this.state.Done}) } >
 							<span>
 							<i className={iclasses} ></i> {this.state.Done?"Mark Undone":"Mark Done"}
@@ -72,10 +79,11 @@ class List extends Component {
 				</div> }
 				
 				{this.state.Modify && <div className="row App mar7" id={this.props.id} >
-				<div className='col-lg-10'>
+				<div className='col-lg-8'>
 				<input className='form-control' type = 'text' placeholder = 'Enter new task' onChange = { evt => this.changeinp(evt) } value = { this.state.inpval } onKeyPress={this.handleKeypress} />
 				</div>
-				<div className='col-lg-2'>
+				<div className="btn-group" role="group" aria-label="Buttons Cancelling and approving modifications">
+				<button className='btn btn-danger' onClick={ () => this.cancelModification() } >Cancel </button>
 				<button className='btn btn-lg btn-warning' type='submit' onClick={ () => this.handleChange(this.state.inpVal) }>Modify</button>					
 				</div>
 				</div> }
