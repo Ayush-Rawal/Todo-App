@@ -40,7 +40,7 @@ class List extends Component {
 		const listclasses = classNames({
 			well: this.state.Done,
 			'list-group-item-success' : this.state.Done,
-			'col-lg-6': true, 
+			'col-lg-8': true, 
 			pad: true,
 			// 'list-group-item':true
 		});	
@@ -58,7 +58,7 @@ class List extends Component {
 					<div className={listclasses}>
 						<h3>{this.props.list}</h3> 
 					</div>
-					<div className='col-lg-6'>
+					<div className='col-lg-4'>
 					<div className="btn-group" role="group" aria-label="Buttons for Done, Delete">
 						<button className='btn btn-lg btn-outline-success' onClick={ () => this.setState({Done:!this.state.Done}) } >
 							<span>
