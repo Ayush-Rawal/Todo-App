@@ -37,10 +37,10 @@ class Page extends Component {
 
 	render() {
 		return (
-		  <div className='container text-center' >
+		  <div className='container text-center center-align' >
 				<h5>Total Tasks: {this.props.totalTasks} </h5>
 				<div className='pagination'>
-					<Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.elemsPerPage} totalItemsCount={this.state.totalElems/* props.totalTasks */} pageRangeDisplayed={this.state.pageRange} onChange={this.handlePageChange.bind(this)} innerClass='pagination btn-group' itemClass="page-item btn btn-group-item" />
+					<Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.elemsPerPage} totalItemsCount={this.state.totalElems/* props.totalTasks */} pageRangeDisplayed={this.state.pageRange} onChange={this.handlePageChange.bind(this)} innerClass='pagination btn-group justify-content-center' itemClass="page-item btn btn-group-item buttons li" />
 				</div>
 			</div>
 		);

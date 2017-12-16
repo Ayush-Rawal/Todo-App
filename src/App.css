@@ -64,3 +64,13 @@
     color: white;
     width: 100vw;
 }
+
+.center-align {
+    align-content: center
+}
+
+.buttons {
+    border: 10px;
+    border-radius: 0.25rem;
+    background-color: #fff;
+}
