@@ -15,7 +15,7 @@ class Input extends Component {
     }
 
 	handleKeypress = (event) => {
-		if(event.key=='Enter'&&event.target.value!==""){
+		if(event.key==='Enter'&&event.target.value!==""){
 			//Function to submit list
 			this.props.addTask(event.target.value);
 			this.setState({

@@ -12,8 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       tasks: JSON.parse(localStorage.getItem('Tasks')) || emptyarr,
-      currTasks: JSON.parse(localStorage.getItem('Tasks'))===null?emptyarr:JSON.parse(localStorage.getItem('Tasks')).slice(0,6),
-      totalTasks: JSON.parse(localStorage.getItem('Tasks'))===null?0:JSON.parse(localStorage.getItem('Tasks')).length ,
+      currTasks: JSON.parse(localStorage.getItem('Tasks')).slice(0,6) || emptyarr ,
+      totalTasks: JSON.parse(localStorage.getItem('Tasks')).length || 0 ,
       currPage:1,
       tasksPerPage:6
     }
