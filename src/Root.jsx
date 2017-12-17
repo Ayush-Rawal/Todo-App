@@ -62,7 +62,7 @@ class App extends Component {
 			totalTasks:tempList.length,
 			currTasks:tempList.slice((this.state.currPage-1)*this.state.tasksPerPage,this.state.currPage*this.state.tasksPerPage),
 		});
-		if(tempList.length%this.state.tasksPerPage===0){
+		if(tempList.length%this.state.tasksPerPage===0&&tempList.length/this.state.tasksPerPage===this.state.currPage-1){
 			this.changeCurrTasks(this.state.currPage-1);
 		}
 	}
