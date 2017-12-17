@@ -14,11 +14,15 @@ class App extends Component {
 		if(JSON.parse(localStorage.getItem('Tasks'))===null){
 			localStorage.setItem('Tasks',JSON.stringify([]));
 		}
+		if(JSON.parse(localStorage.getItem('CompletedTasks'))===null){
+			localStorage.setItem('CompletedTasks',JSON.stringify(0));
+		}
 
 		this.state = {
 			tasks: JSON.parse(localStorage.getItem('Tasks')),
 			currTasks: JSON.parse(localStorage.getItem('Tasks')).slice(0,6),
 			totalTasks: JSON.parse(localStorage.getItem('Tasks')).length,
+			completedTasks: JSON.parse(localStorage.getItem('CompletedTasks')),
 			currPage:1,
 			tasksPerPage:6,
 		};
@@ -74,6 +78,13 @@ class App extends Component {
 		});
 	}
 
+	changeCompletedTasks(done){
+		let subtractend =  done?1:-1;
+		this.setState({
+			completedTasks:this.state.completedTasks - subtractend,
+		});
+	}
+
 	handlekeyDown(event){
 		if(event.key==='ArrowRight'){
 			if(this.state.currPage!==Math.ceil(this.state.totalTasks/this.state.tasksPerPage)){
@@ -102,8 +113,8 @@ class App extends Component {
 					<Header/>
 				</div>
 				<Input addTask={this.addTask.bind(this)}/>
-				<Lists lists={this.state.currTasks.concat([])} handleDelete={this.deleteTask.bind(this)} handleModify={this.modifyTask.bind(this)} />
-				<Page lists={this.state.tasks.concat([])} totalTasks={this.state.totalTasks} tasksPerPage={this.state.tasksPerPage} changeCurrTasks={this.changeCurrTasks.bind(this)}/>
+				<Lists lists={this.state.currTasks.concat([])} handleDelete={this.deleteTask.bind(this)} handleModify={this.modifyTask.bind(this)} handleDone={this.changeCompletedTasks.bind(this)} />
+				<Page lists={this.state.tasks.concat([])} totalTasks={this.state.totalTasks} completedTasks={this.state.completedTasks} tasksPerPage={this.state.tasksPerPage} changeCurrTasks={this.changeCurrTasks.bind(this)}/>
 			</div>	
 		);
 	}

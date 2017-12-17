@@ -46,6 +46,11 @@ class List extends Component {
 		})
 	}
 
+	handleDone = () => {
+		this.setState({Done:!this.state.Done});
+		this.props.handleDone(this.state.Done);
+	}
+
 	componentDidMount() {
         window.addEventListener('keydown', (event) => this.handleKeypress(event));
     }
@@ -79,7 +84,7 @@ class List extends Component {
 					</div>
 					<div className='col-lg-4'>
 					<div className="btn-group" role="group" aria-label="Buttons for Done, Modify and Delete">
-						<button className='btn btn-lg btn-outline-success' onClick={ () => this.setState({Done:!this.state.Done}) } >
+						<button className='btn btn-lg btn-outline-success' onClick={ () => this.handleDone() } >
 							<span>
 							<i className={iclasses} ></i> {this.state.Done?"Mark Undone":"Mark Done"}
 							</span>

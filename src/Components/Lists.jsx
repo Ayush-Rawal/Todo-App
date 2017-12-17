@@ -6,7 +6,7 @@ class Lists extends Component {
 	render(){
 		return(
 			<div>
-				{this.props.lists.map(list => <List list={list.slice()} id={list.slice()} handleDelete={this.props.handleDelete} handleModify={this.props.handleModify} />)}
+				{this.props.lists.map(list => <List list={list.slice()} id={list.slice()} handleDelete={this.props.handleDelete} handleModify={this.props.handleModify} handleDone={this.props.handleDone} />)}
 			</div>
 		)
 	}
