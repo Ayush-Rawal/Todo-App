@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import './App.css'
-import Header from './Components/Header'
-import Lists from './Components/Lists'
-import Input from './Components/Input'
-import Page from './Components/Page'
+import Header from './Components/Header.jsx'
+import Lists from './Components/Lists.jsx'
+import Input from './Components/Input.jsx'
+import Page from './Components/Page.jsx'
 
 'use strict';
 
@@ -72,6 +72,27 @@ class App extends Component {
 			tasks:tempList.concat([]),
 			currTasks:tempList.slice((this.state.currPage-1)*this.state.tasksPerPage,this.state.currPage*this.state.tasksPerPage),
 		});
+	}
+
+	handlekeyDown(event){
+		if(event.key==='ArrowRight'){
+			if(this.state.currPage!==Math.ceil(this.state.totalTasks/this.state.tasksPerPage)){
+				this.changeCurrTasks(this.state.currPage+1);
+			}
+		}
+		if(event.key==='ArrowLeft'){
+			if(this.state.currPage!==1){
+				this.changeCurrTasks(this.state.currPage-1);
+			}
+		}
+	}
+
+	componentDidMount(){
+		window.addEventListener('keydown',event => this.handlekeyDown(event));
+	}
+
+	componentWillUnmount(){
+		window.removeEventListener('keydown',event => this.handlekeyDown(event));
 	}
 
 	render(){
