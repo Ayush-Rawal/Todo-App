@@ -30,9 +30,9 @@ class List extends Component {
 	}
 
 	handleKeypress = (event) => {
-//		if(event.key==='Enter'&&event.target.value!==""){
-//			this.handleChange(event.target.value);
-//		} else
+		if(this.state.Modify&&event.key==='Enter'&&event.target.value!==""){
+			this.handleChange(event.target.value);
+		} else
 		if(event.key==='Escape'){
 			this.cancelModification();
 		}
